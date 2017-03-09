@@ -17,6 +17,9 @@ namespace AchadosPerdidosApi
                 .AddCommandLine(args)
                 .AddEnvironmentVariables(prefix: "ASPNETCORE_")
                 .Build();
+            
+            var port = Environment.GetEnvironmentVariable("PORT");
+                      
 
             var host = new WebHostBuilder()
                 .UseConfiguration(config)
@@ -24,6 +27,7 @@ namespace AchadosPerdidosApi
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
+                .UseUrls($"http://*:{port}/")
                 .Build();
 
             host.Run();
